@@ -33,8 +33,10 @@ defmodule TwixirWeb.Home do
     |> select([s], s.user_id)
     |> Repo.all
 
+    Enum.map(subscriptions, fn(x) -> TwixirWeb.Endpoint.subscribe("twixir#{x}") end )
 
     twixs = Enum.map(subscriptions, fn(x) -> Twix
+    |> preload([u], :user)
     |> where([t], t.user_id == ^x)
     |> order_by([t], [asc: t.inserted_at])
     |> Repo.all end)
