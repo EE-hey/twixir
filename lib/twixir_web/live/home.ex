@@ -53,11 +53,19 @@ defmodule TwixirWeb.Home do
     ~H"""
     <h2>My feed</h2>
 
-    <table>
+    <div class="mx-32  ">
     <%= for t <- @twixs do %>
-      <tr><td><%= t.user.email %></td><td><%= t.content %></td></tr>
+      <div class="my-16 px-4 py-8 bg-grey-200  shadow rounded-lg">
+        <div class="px-16 py-8">
+          <div class="flex flex-row">
+            <img class="rounded-full object-cover h-16 w-16 ..." src="https://pixabay.com/static/img/profile_image_dummy.svg" />
+            <span class="inline-block align-middle"><%= t.user.email %></span>
+          </div>
+        </div>
+        <div class="px-16 py-8"><%= t.content %></div>
+      </div>
     <% end %>
-    </table>
+    </div>
     """
   end
 

@@ -26,7 +26,8 @@ config :twixir, TwixirWeb.Endpoint,
   secret_key_base: "cvSrYqNO+5d+pe07zGwO4Gm7VNbNOue/K3dqGCFzzuyYiJN8u6lONl4eP6OHhip3",
   watchers: [
     # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:default, ~w(--watch)]}
   ]
 
 # ## SSL Support

@@ -39,21 +39,30 @@ defmodule TwixirWeb.PersonnalPage do
 
     ~H"""
 
-    <div>
-      <form phx-submit="send_twix"  style="display: flex; flex-direction: row;">
-        <input type="text" name="twix" id="twix" />
-        <button>Twix</button>
+    <div class="w-full">
+      <form phx-submit="send_twix"  class=" mx-32 flex flew-row w-full">
+        <input type="text" name="twix" id="twix" class="w-96 rounded border-grey-200 mr-4" />
+        <button class="shadow rounded bg-blue-800 w-96 text-white">Twix</button>
       </form>
     </div>
 
-    <table>
+    <div class="mx-32  ">
     <%= for user <- @twixs do %>
 
       <%= for twix <- user.twixs do %>
-      <tr><td><%= user.email %></td><td> <%= twix.content %></td></tr>
+
+      <div class="my-16 px-4 py-8 bg-grey-200  shadow rounded-lg">
+        <div class="px-16 py-8">
+          <div class="flex flex-row">
+            <img class="rounded-full object-cover h-16 w-16 ..." src="https://pixabay.com/static/img/profile_image_dummy.svg" />
+            <span class="inline-block align-middle"><%= user.email %> </span>
+          </div>
+        </div>
+        <div class="px-16 py-8"><%= twix.content %></div>
+      </div>
       <% end %>
     <% end %>
-    </table>
+    </div>
 
 
     """
