@@ -1,5 +1,5 @@
 defmodule TwixirWeb.Home do
-  use Phoenix.LiveView
+  use Phoenix.LiveView, layout: {TwixirWeb.LayoutView, "live.html"}
   alias Twixir.{Subscription, Repo, Twix}
   import Ecto.Query
   def mount(_params, session, socket) do
@@ -11,6 +11,7 @@ defmodule TwixirWeb.Home do
     Enum.map(subscriptions, fn(x) -> TwixirWeb.Endpoint.subscribe("twixir#{x}") end )
 
     twixs = Enum.map(subscriptions, fn(x) -> Twix
+    |> preload([u], :user)
     |> where([t], t.user_id == ^x)
     |> order_by([t], [asc: t.inserted_at])
     |> Repo.all end)
@@ -54,7 +55,7 @@ defmodule TwixirWeb.Home do
 
     <table>
     <%= for t <- @twixs do %>
-      <tr><td><%= t.user_id %></td><td><%= t.content %></td></tr>
+      <tr><td><%= t.user.email %></td><td><%= t.content %></td></tr>
     <% end %>
     </table>
     """

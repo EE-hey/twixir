@@ -1,6 +1,6 @@
 defmodule TwixirWeb.Follow do
 
-  use Phoenix.LiveView
+  use Phoenix.LiveView, layout: {TwixirWeb.LayoutView, "live.html"}
   alias Twixir.Accounts.User
   alias Twixir.Subscription
 

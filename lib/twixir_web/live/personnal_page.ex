@@ -1,6 +1,6 @@
 defmodule TwixirWeb.PersonnalPage do
 
-  use Phoenix.LiveView
+  use Phoenix.LiveView, layout: {TwixirWeb.LayoutView, "live.html"}
   import Ecto.Query
   alias Twixir.Accounts.User
   alias Twixir.Repo
