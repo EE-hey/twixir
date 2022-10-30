@@ -26,14 +26,12 @@ defmodule TwixirWeb.Home do
   end
 
 
-  def handle_info(%{event: "update", payload: payload}, socket) do
-
+  def handle_info(%{event: "update", payload: %{id: _}}, socket) do
+    IO.inspect("message reçu !!!!!!!!")
     subscriptions = Subscription
     |> where([s], s.follower == ^socket.assigns.current_user.id)
     |> select([s], s.user_id)
     |> Repo.all
-
-    Enum.map(subscriptions, fn(x) -> TwixirWeb.Endpoint.subscribe("twixir#{x}") end )
 
     twixs = Enum.map(subscriptions, fn(x) -> Twix
     |> preload([u], :user)

@@ -1,7 +1,7 @@
 defmodule Twixir.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Twixir.Repo
+  alias Twixir.{Repo,Twix}
   alias Twixir.Accounts.User
   import Ecto.Query
 
@@ -146,7 +146,8 @@ defmodule Twixir.Accounts.User do
 
 
   def twix_by_user_id(user,user_id) do
-    user |> where([u], u.id == ^user_id) |> preload([t], :twixs) |> Repo.all
+    query = Twix |> order_by([t], [desc: t.inserted_at])
+    user |> where([u], u.id == ^user_id)  |> preload([t], [twixs: ^query]) |> Repo.all
   end
   def find_all_users() do
     User
